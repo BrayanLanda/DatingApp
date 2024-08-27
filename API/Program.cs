@@ -11,6 +11,7 @@ builder.Services.AddIdentityServices(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseDeveloperExceptionPage();
 app.UseCors(x => 
     x.AllowAnyHeader()
     .AllowAnyMethod()
