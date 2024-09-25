@@ -24,13 +24,13 @@ namespace API.Controllers
 
             return Ok(users);
         }
-  
+
         [HttpGet("{username}")] //api/users/id
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
             var user = await userRepository.GetMemberAsync(username);
 
-            if(user == null) return NotFound();
+            if (user == null) return NotFound();
 
             return user;
         }
@@ -39,11 +39,11 @@ namespace API.Controllers
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
         {
             var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            if(username == null) return BadRequest("No username found is token");
+            if (username == null) return BadRequest("No username found is token");
             var user = await userRepository.GetUserByUsernameAsync(username);
-            if(user == null) return BadRequest("Could not find user");
+            if (user == null) return BadRequest("Could not find user");
             mapper.Map(memberUpdateDto, user);
-            if(await userRepository.SaveAllAsync()) return NoContent();
+            if (await userRepository.SaveAllAsync()) return NoContent();
             return BadRequest("Faild to update the user");
         }
     }
