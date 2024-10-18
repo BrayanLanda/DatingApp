@@ -25,6 +25,8 @@ app.UseCors(x =>
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+
+
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 

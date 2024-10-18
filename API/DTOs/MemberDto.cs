@@ -20,6 +20,6 @@ namespace API.DTOs
         public string? LookingFor { get; set; }
         public string? City { get; set; }
         public string? Country { get; set; }
-        public List<PhotoDto>? Photo { get; set; }
+        public List<PhotoDto>? Photos { get; set; }
     }
 }
