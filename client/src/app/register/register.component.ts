@@ -1,20 +1,36 @@
-import { Component, inject, input, output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, inject, OnInit, output } from '@angular/core';
+import { AbstractControl, FormGroup, FormsModule, ReactiveFormsModule, ValidatorFn } from '@angular/forms';
 import { AccountService } from '../_services/account.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule, NgIf],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit{
   private accountService = inject(AccountService);
   private toastr = inject(ToastrService);
   cancelRegister = output<boolean>();
   model: any = {};
+  registerForm: FormGroup = new FormGroup({});
+
+  ngOnInit(): void {
+    this.initializeForm();
+  }
+
+  initializeForm(){
+
+  }
+
+  matchValues(matchTo: string): ValidatorFn{
+    return(control: AbstractControl) => {
+      return control.value === control.parent?.get(matchTo)?.value ? null : {isMaching: true}
+    }
+  }
 
   register(){
     this.accountService.register(this.model).subscribe({

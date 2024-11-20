@@ -1,8 +1,8 @@
-<form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off">
+<form [formGroup]="registerForm" (ngSubmit)="register()" autocomplete="off">
     <h2 class="text-center text-primary">Sing up</h2>
     <hr>
     <div class="mb-3 form-floating">
-        <input 
+        <input
             type="text"
             class="form-control"
             name="username"
@@ -13,7 +13,7 @@
     </div>
 
     <div class="mb-3 form-floating">
-        <input 
+        <input
             type="password"
             class="form-control"
             name="password"
