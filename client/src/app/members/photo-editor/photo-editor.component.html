@@ -61,8 +61,8 @@
             <div>
                 Queue progress:
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader?.progress + '%' }"></div>
-                </div>
+                  <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader?.progress + '%' }"></div>
+              </div>
             </div>
             <button type="button" class="btn btn-success btn-s"
                     (click)="uploader?.uploadAll()" [disabled]="!uploader?.getNotUploadedItems()?.length">
