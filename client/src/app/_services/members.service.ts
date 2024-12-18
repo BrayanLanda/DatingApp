@@ -2,11 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, model, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Member } from '../_models/member';
-import { of, tap } from 'rxjs';
+import { of } from 'rxjs';
 import { Photo } from '../_models/photo';
 import { UserParams } from '../_models/userParams';
 import { PaginatedResult } from '../_models/pagination';
 import { AccountService } from './account.service';
+import { setPaginatedResponse, setPaginationHeaders } from './paginationHelper';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +29,6 @@ export class MembersService {
     const response = this.memberCache.get(
       Object.values(this.userParams()).join('-')
     );
-
     if (response) return setPaginatedResponse(response, this.paginatedResult);
 
     let params = setPaginationHeaders(
@@ -42,7 +42,7 @@ export class MembersService {
     params = params.append('orderBy', this.userParams().orderBy);
 
     return this.http
-      .get<Member[]>(this.baseUrl + 'users', { observe: 'response', params })
+      .get<Member[]>(this.baseUrl + '/users', { observe: 'response', params })
       .subscribe({
         next: (response) => {
           setPaginatedResponse(response, this.paginatedResult);
